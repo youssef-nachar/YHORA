@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YHORA | Custom Enterprise & POS Shop Systems</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Open+Sans:wght@300;400;600&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --brand-red: #d32f2f;
+            --brand-dark-red: #8e0000;
+            --brand-accent: #ff5252;
+            --text-white: #ffffff;
+            --text-muted: #a0a0a0;
+            --bg-dark: #07080a;
+            --card-bg: rgba(17, 19, 25, 0.85);
+            --card-hover-bg: rgba(22, 25, 34, 0.95);
+            --menu-bg: #0b0d12;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --transition-curve: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body, html {
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text-white);
+        }
+
+        /* Top Navigation Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 3rem;
+            z-index: 100;
+            background: linear-gradient(to bottom, rgba(7, 8, 10, 0.95), rgba(7, 8, 10, 0));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+            cursor: pointer;
+            z-index: 201;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: var(--brand-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            box-shadow: 0 0 20px rgba(211, 47, 47, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover .logo-icon {
+            transform: rotate(180deg);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: var(--text-white);
+            text-transform: uppercase;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .customer-care {
+            color: var(--brand-red);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Hamburger Menu Button */
+        .menu-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 6px;
+            z-index: 300;
+            padding: 8px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-btn span {
+            display: block;
+            height: 2px;
+            background-color: var(--text-white);
+            border-radius: 2px;
+            transition: all 0.4s var(--transition-curve);
+        }
+
+        .menu-btn span:nth-child(1) { width: 26px; }
+        .menu-btn span:nth-child(2) { width: 18px; background-color: var(--brand-red); }
+        .menu-btn span:nth-child(3) { width: 22px; }
+
+        .menu-btn.is-active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+            width: 24px;
+            background-color: var(--brand-red);
+        }
+
+        .menu-btn.is-active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(10px);
+        }
+
+        .menu-btn.is-active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+            width: 24px;
+            background-color: var(--brand-red);
+        }
+
+        /* Overlay & Off-Canvas Menu */
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 190;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .offcanvas-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 440px;
+            height: 100vh;
+            background-color: var(--menu-bg);
+            z-index: 200;
+            padding: 3rem 2.5rem 2.5rem;
+            transition: right 0.5s var(--transition-curve);
+            box-shadow: -20px 0 50px rgba(0, 0, 0, 0.95);
+            border-left: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+        }
+
+        .offcanvas-menu.active {
+            right: 0;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .menu-tag {
+            font-size: 0.75rem;
+            font-family: 'Fira Code', monospace;
+            color: var(--brand-red);
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .menu-tag::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: var(--brand-red);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--brand-red);
+        }
+
+        .menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            text-decoration: none;
+            padding: 1rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid transparent;
+        }
+
+        .nav-item:hover, .nav-item.active-link {
+            background: rgba(211, 47, 47, 0.08);
+            border-color: rgba(211, 47, 47, 0.3);
+        }
+
+        .nav-code {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: var(--brand-red);
+            font-weight: 700;
+        }
+
+        .nav-text .title {
+            display: block;
+            color: var(--text-white);
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .nav-text .subtitle {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 0.2rem;
+            font-weight: 300;
+        }
+
+        .menu-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--border-color), transparent);
+            margin: 1.5rem 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1.2rem;
+        }
+
+        .social-icons a {
+            color: var(--text-white);
+            background: rgba(255, 255, 255, 0.03);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        /* App Page Router System */
+        .page-view {
+            display: none;
+            min-height: 100vh;
+            width: 100vw;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s var(--transition-curve), transform 0.5s var(--transition-curve);
+        }
+
+        .page-view.active-page {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 4 SUB-PAGES BACKGROUND STYLES (UNIQUE BEAUTIFUL STYLES) */
+        .sub-page {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 7rem 2rem 5rem;
+            position: relative;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Style 1: Cyber Grid Glow */
+        .bg-style-1 {
+            background: radial-gradient(circle at 10% 20%, rgba(211, 47, 47, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 80%, rgba(142, 0, 0, 0.2) 0%, transparent 50%),
+                        #07080a;
+            background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 40px 40px, 40px 40px;
+        }
+
+        /* Style 2: Midnight Dark Crimson */
+        .bg-style-2 {
+            background: linear-gradient(135deg, #090a0f 0%, #170506 50%, #07080a 100%);
+        }
+
+        /* Style 3: Charcoal Deep Ambient */
+        .bg-style-3 {
+            background: radial-gradient(circle at 50% 50%, rgba(142, 0, 0, 0.1) 0%, rgba(7, 8, 10, 0.95) 70%),
+                        linear-gradient(180deg, #0b0d13 0%, #050608 100%);
+        }
+
+        /* Style 4: Modern Technical Mesh Glow */
+        .bg-style-4 {
+            background: radial-gradient(circle at 80% 20%, rgba(211, 47, 47, 0.12) 0%, transparent 45%),
+                        linear-gradient(45deg, #060709 0%, #12151e 100%);
+        }
+
+        /* Hero Slider */
+        .slider-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transform: scale(1.05);
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(142, 0, 0, 0.85) 0%, rgba(7, 8, 10, 0.92) 100%);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            max-width: 1100px;
+        }
+
+        .slide-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            color: var(--text-white);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .slide-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            line-height: 1.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(11, 13, 18, 0.6);
+            border: 1px solid var(--border-color);
+            color: var(--text-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 20;
+        }
+
+        .slider-arrow.prev { left: 2rem; }
+        .slider-arrow.next { right: 2rem; }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 4rem;
+            left: 10%;
+            z-index: 10;
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 30px;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .dot.active {
+            background-color: var(--brand-red);
+            width: 50px;
+        }
+
+        /* General Page Layout */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1.5rem;
+        }
+
+        .page-badge {
+            font-family: 'Fira Code', monospace;
+            color: var(--brand-red);
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .page-main-title {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .page-lead {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 850px;
+            line-height: 1.7;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        /* ================= HIGH-TECH ARCHITECTURE DIAGRAMS ================= */
+        .diagram-wrapper {
+            background: rgba(11, 13, 18, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem 2rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Diagram 1: Concentric Orbital Core Diagram */
+        .orbit-container {
+            position: relative;
+            width: 420px;
+            height: 420px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px dashed rgba(211, 47, 47, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit-ring.outer {
+            width: 390px;
+            height: 390px;
+            border-style: solid;
+            border-color: rgba(255, 255, 255, 0.08);
+            animation: rotateClockwise 40s linear infinite;
+        }
+
+        .orbit-ring.middle {
+            width: 280px;
+            height: 280px;
+            border-color: rgba(211, 47, 47, 0.4);
+            animation: rotateCounterClockwise 25s linear infinite;
+        }
+
+        .orbit-ring.inner {
+            width: 170px;
+            height: 170px;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .orbit-center {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            background: radial-gradient(circle, var(--brand-red) 0%, var(--brand-dark-red) 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 0 35px rgba(211, 47, 47, 0.7);
+            z-index: 10;
+        }
+
+        .orbit-center i {
+            font-size: 1.6rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .orbit-center span {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .orbit-node {
+            position: absolute;
+            background: var(--card-bg);
+            border: 1px solid var(--brand-red);
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        .orbit-node:hover {
+            transform: scale(1.15);
+            background: var(--brand-red);
+            box-shadow: 0 0 20px rgba(211, 47, 47, 0.8);
+            z-index: 20;
+        }
+
+        .node-pos-1 { top: -15px; left: 50%; transform: translateX(-50%); }
+        .node-pos-2 { bottom: -15px; left: 50%; transform: translateX(-50%); }
+        .node-pos-3 { left: -25px; top: 50%; transform: translateY(-50%); }
+        .node-pos-4 { right: -25px; top: 50%; transform: translateY(-50%); }
+        .node-pos-5 { top: 15px; right: 15px; }
+        .node-pos-6 { bottom: 15px; left: 15px; }
+
+        @keyframes rotateClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes rotateCounterClockwise {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        /* Diagram 2: Network Ecosystem Flow Diagram */
+        .mesh-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            position: relative;
+            z-index: 5;
+            gap: 1.5rem;
+        }
+
+        .mesh-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            flex: 1;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .mesh-card:hover {
+            border-color: var(--brand-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(211, 47, 47, 0.25);
+        }
+
+        .mesh-card i {
+            font-size: 2rem;
+            color: var(--brand-red);
+            margin-bottom: 0.8rem;
+        }
+
+        .mesh-card h4 {
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .mesh-card p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .mesh-connector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--brand-red);
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .mesh-connector::before {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--brand-red), transparent);
+            animation: pulseLine 2s infinite;
+        }
+
+        @keyframes pulseLine {
+            0% { opacity: 0.2; }
+            50% { opacity: 1; }
+            100% { opacity: 0.2; }
+        }
+
+        /* Cards & Grids */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--brand-red);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background-color: var(--card-hover-bg);
+            border-color: rgba(211, 47, 47, 0.4);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: var(--brand-red);
+            margin-bottom: 1.2rem;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .card-text {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .card-list {
+            margin-top: 1.2rem;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .card-list li {
+            font-size: 0.85rem;
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card-list li i {
+            color: var(--brand-red);
+            font-size: 0.75rem;
+        }
+
+        /* Timeline Step Component */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .timeline-step {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 1.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .step-number {
+            font-family: 'Fira Code', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--brand-red);
+            min-width: 50px;
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Forms & Buttons */
+        .contact-form {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-white);
+            font-size: 0.95rem;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--brand-red);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background-color: var(--brand-red);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--brand-red);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 6px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            padding: 1.2rem 1.5rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .faq-question {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .faq-question i {
+            color: var(--brand-red);
+        }
+
+        .faq-answer {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Bottom Fixed Bar */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 0.8rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 90;
+            background: rgba(7, 8, 10, 0.95);
+            border-top: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            font-size: 0.85rem;
+        }
+
+        .contact-link {
+            color: var(--text-white);
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 1.5rem; }
+            .slide-title { font-size: 2.2rem; }
+            .offcanvas-menu { width: 100%; }
+            .customer-care { display: none; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .page-main-title { font-size: 2rem; }
+            .bottom-bar { padding: 0.8rem 1.5rem; font-size: 0.75rem; }
+            .timeline-step { flex-direction: column; gap: 0.5rem; }
+            .orbit-container { width: 300px; height: 300px; }
+            .orbit-ring.outer { width: 280px; height: 280px; }
+            .orbit-ring.middle { width: 200px; height: 200px; }
+            .orbit-ring.inner { width: 120px; height: 120px; }
+            .mesh-grid { flex-direction: column; }
+            .sub-page { min-height: auto; padding: 6rem 1.5rem 3rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <a onclick="navigateTo('home')" class="brand-logo">
+            <div class="logo-icon"><i class="fa-solid fa-code"></i></div>
+            <div class="logo-text">YHORA</div>
+        </a>
+
+        <div class="header-right">
+            <div class="customer-care">
+                <i class="fa-solid fa-headset"></i> On-Site Enterprise Support
+            </div>
+            <button class="menu-btn" id="menuToggle" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Overlay Backdrop -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <!-- Off-Canvas Navigation Drawer -->
+    <nav class="offcanvas-menu" id="offcanvasMenu">
+        <div class="menu-header">
+            <span class="menu-tag">YHORA NAVIGATION SYSTEM</span>
+        </div>
+
+        <ul class="menu-links">
+            <li>
+                <div onclick="navigateTo('ecosystem')" class="nav-item" data-page="ecosystem">
+                    <span class="nav-code">01</span>
+                    <div class="nav-text">
+                        <span class="title">CUSTOM POS & SHOP SYSTEMS</span>
+                        <span class="subtitle">Tailored Retail, Inventory & Barcode Software</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div onclick="navigateTo('digital-craft')" class="nav-item" data-page="digital-craft">
+                    <span class="nav-code">02</span>
+                    <div class="nav-text">
+                        <span class="title">TAILORED SOFTWARE SOLUTIONS</span>
+                        <span class="subtitle">Bespoke Web Platforms & Custom Code</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div onclick="navigateTo('deployment')" class="nav-item" data-page="deployment">
+                    <span class="nav-code">03</span>
+                    <div class="nav-text">
+                        <span class="title">ON-SITE DEPLOYMENT</span>
+                        <span class="subtitle">Direct Shop Visits & Hardware Setup</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div onclick="navigateTo('dna')" class="nav-item" data-page="dna">
+                    <span class="nav-code">04</span>
+                    <div class="nav-text">
+                        <span class="title">YHORA DNA</span>
+                        <span class="subtitle">Engineering Standards & High Reliability</span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div onclick="navigateTo('client-hub')" class="nav-item" data-page="client-hub">
+                    <span class="nav-code">05</span>
+                    <div class="nav-text">
+                        <span class="title">START A PROJECT</span>
+                        <span class="subtitle">Book On-Site Visit & System Consultation</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <div class="menu-footer">
+            <div class="menu-divider"></div>
+            <div class="footer-links">
+                <a onclick="navigateTo('client-hub')">Direct Field Support</a>
+                <a href="#privacy">Enterprise Protocol</a>
+            </div>
+            <div class="social-icons">
+                <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+                <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ================= PAGE 0: HOME SLIDER PAGE ================= -->
+    <div id="page-home" class="page-view active-page">
+        <div class="slider-container" id="sliderContainer">
+            
+
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1556742049-0a67d518d6a8?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1 class="slide-title">INTELLIGENT POS</h1>
+                    <p class="slide-description">
+                        COMMERCIAL STORE MANAGEMENT SYSTEMS<br>
+                        HIGH-SPEED BARCODE INTEGRATION<br>
+                        REAL-TIME INVENTORY TRACKING
+                    </p>
+                    <div><a onclick="navigateTo('ecosystem')" class="btn-cta">Explore POS Systems</a></div>
+                </div>
+            </div>
+
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1 class="slide-title">ON-SITE SETUP</h1>
+                    <p class="slide-description">
+                        DIRECT PHYSICAL STORE EVALUATION<br>
+                        HARDWARE & PRINTER SYNCHRONIZATION<br>
+                        TAILORED CASHIER WORKFLOWS
+                    </p>
+                    <div><a onclick="navigateTo('deployment')" class="btn-cta">Learn On-Site Process</a></div>
+                </div>
+            </div>
+
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1920&q=80');">
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <h1 class="slide-title">CUSTOM CODE</h1>
+                    <p class="slide-description">
+                        ZERO DEPENDENCY FRAMEWORKS<br>
+                        HIGH-PERFORMANCE WEB SYSTEMS<br>
+                        OFFLINE-FIRST ARCHITECTURE
+                    </p>
+                    <div><a onclick="navigateTo('digital-craft')" class="btn-cta">Custom Software Solutions</a></div>
+                </div>
+            </div>
+
+            <div class="slider-dots" id="sliderDots">
+                <div class="dot active" onclick="goToSlide(0)"></div>
+                <div class="dot" onclick="goToSlide(1)"></div>
+                <div class="dot" onclick="goToSlide(2)"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 1: CUSTOM POS & SHOP SYSTEMS ================= -->
+    <div id="page-ecosystem" class="page-view">
+        
+        <!-- SUB-PAGE 1 (BG STYLE 1) -->
+        <section class="sub-page bg-style-1">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-badge">// SYSTEM ARCHITECTURE 01 - SUB PAGE 1</span>
+                    <h1 class="page-main-title">Custom POS & Commercial Shop Systems</h1>
+                    <p class="page-lead">Generic software slows down cashiers and creates inventory gaps. YHORA builds customized Point-of-Sale (POS) architectures engineered specifically around your commercial store type, receipt layout, and cashier preferences.</p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">0.1s</div>
+                        <div class="stat-label">Barcode Scan Latency</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Offline Operating Capacity</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">Zero</div>
+                        <div class="stat-label">Stock Leakage & Audit Lag</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 2 (BG STYLE 2) -->
+        <section class="sub-page bg-style-2">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 2: Integrated Store Core Diagram</h2>
+                <div class="diagram-wrapper">
+                    <div class="orbit-container">
+                        <div class="orbit-center">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span>YHORA<br>POS CORE</span>
+                        </div>
+
+                        <div class="orbit-ring outer">
+                            <div class="orbit-node node-pos-1"><i class="fa-solid fa-barcode"></i> Barcode Readers</div>
+                            <div class="orbit-node node-pos-2"><i class="fa-solid fa-print"></i> Thermal Receipt</div>
+                            <div class="orbit-node node-pos-3"><i class="fa-solid fa-scale-balanced"></i> Weighing Scales</div>
+                            <div class="orbit-node node-pos-4"><i class="fa-solid fa-cash-register"></i> Cash Drawer</div>
+                        </div>
+
+                        <div class="orbit-ring middle">
+                            <div class="orbit-node node-pos-5"><i class="fa-solid fa-boxes-stacked"></i> Stock Auditing</div>
+                            <div class="orbit-node node-pos-6"><i class="fa-solid fa-vault"></i> Cashier Shifts</div>
+                        </div>
+
+                        <div class="orbit-ring inner"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 3 (BG STYLE 3) -->
+        <section class="sub-page bg-style-3">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 3: Engineered For Operations</h2>
+                <div class="grid-3">
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-barcode"></i></div>
+                        <h3 class="card-title">Barcode & Hardware Native</h3>
+                        <p class="card-text">Direct scanner input listening without browser focus loss. Instant item lookup and automatic weight-scale calculation.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> USB/Bluetooth Scanner Input</li>
+                            <li><i class="fa-solid fa-check"></i> Thermal Receipt & Sticker Printing</li>
+                            <li><i class="fa-solid fa-check"></i> Automated Cash Drawer Kickout</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+                        <h3 class="card-title">Precision Inventory Engine</h3>
+                        <p class="card-text">Track item batches, multi-unit pricing (piece, box, carton), expiry warnings, and automated purchase order generation.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> Multi-Level Packaging Discounts</li>
+                            <li><i class="fa-solid fa-check"></i> Low Stock & Expiry Alerts</li>
+                            <li><i class="fa-solid fa-check"></i> Supplier Payment Audit Logs</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-chart-pie"></i></div>
+                        <h3 class="card-title">Real-Time Revenue Auditing</h3>
+                        <p class="card-text">Monitor cashier shifts, track daily net profit, prevent cashier tampering, and export clean financial reports instantly.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> End-of-Shift Cash Difference Audit</li>
+                            <li><i class="fa-solid fa-check"></i> Net Profit vs Cost Margin View</li>
+                            <li><i class="fa-solid fa-check"></i> One-Click Excel / PDF Export</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 4 (BG STYLE 4) -->
+        <section class="sub-page bg-style-4">
+            <div class="container">
+                <div class="feature-card" style="text-align: center; padding: 4rem 2rem; background: linear-gradient(135deg, rgba(211,47,47,0.15) 0%, rgba(17,19,25,0.9) 100%); border-color: rgba(211,47,47,0.4);">
+                    <span class="page-badge">// SUB PAGE 4: TAKE ACTION</span>
+                    <h2 style="font-size: 2.2rem; margin-bottom: 1rem; text-transform: uppercase;">Ready to Upgrade Your Store System?</h2>
+                    <p style="color: var(--text-muted); max-width: 650px; margin: 0 auto 1.5rem;">We evaluate your store layout and install customized software directly on your cashier desks.</p>
+                    <a onclick="navigateTo('client-hub')" class="btn-cta">Request On-Site System Demo</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= PAGE 2: TAILORED SOFTWARE SOLUTIONS ================= -->
+    <div id="page-digital-craft" class="page-view">
+        
+        <!-- SUB-PAGE 1 (BG STYLE 2) -->
+        <section class="sub-page bg-style-2">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-badge">// SYSTEM ARCHITECTURE 02 - SUB PAGE 1</span>
+                    <h1 class="page-main-title">Tailored Software & Web Platforms</h1>
+                    <p class="page-lead">Off-the-shelf software forces your company to change its operations. YHORA builds custom web platforms and management systems that match your exact business logic with zero unnecessary bloat.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 2 (BG STYLE 3) -->
+        <section class="sub-page bg-style-3">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 2: Hardware & Software Mesh Network</h2>
+                <div class="diagram-wrapper">
+                    <div class="mesh-grid">
+                        <div class="mesh-card">
+                            <i class="fa-solid fa-store"></i>
+                            <h4>Physical POS</h4>
+                            <p>Cashier Terminal & Scanners</p>
+                        </div>
+                        <div class="mesh-connector"><i class="fa-solid fa-arrows-left-right"></i></div>
+                        <div class="mesh-card" style="border-color: var(--brand-red);">
+                            <i class="fa-solid fa-server"></i>
+                            <h4>Local YHORA Engine</h4>
+                            <p>Offline DB & Instant Calc</p>
+                        </div>
+                        <div class="mesh-connector"><i class="fa-solid fa-arrows-left-right"></i></div>
+                        <div class="mesh-card">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <h4>Cloud Sync</h4>
+                            <p>Owner Dashboard & Audit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 3 (BG STYLE 4) -->
+        <section class="sub-page bg-style-4">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 3: Engineering Core Principles</h2>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-code-merge"></i></div>
+                        <h3 class="card-title">Zero Dependency Bloat</h3>
+                        <p class="card-text">We code clean, high-performance web systems that load in milliseconds. No heavy pre-made templates that slow down your team.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> Lightweight Vanilla JS & Scalable Backends</li>
+                            <li><i class="fa-solid fa-check"></i> High Security & Fast Query Execution</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-wifi-slash"></i></div>
+                        <h3 class="card-title">Offline-First Technology</h3>
+                        <p class="card-text">Internet interruptions should never stop your operations. YHORA systems operate locally and sync automatically when connectivity returns.</p>
+                        <ul class="card-list">
+                            <li><i class="fa-solid fa-check"></i> Local Data Persistence Engine</li>
+                            <li><i class="fa-solid fa-check"></i> Automatic Background Database Sync</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 4 (BG STYLE 1) -->
+        <section class="sub-page bg-style-1">
+            <div class="container">
+                <div class="feature-card" style="text-align: center; padding: 4rem 2rem;">
+                    <span class="page-badge">// SUB PAGE 4: CONSULTATION</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Need a Custom Platform Engineered for Your Business?</h2>
+                    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto 1.5rem;">Let us discuss your project specs and build a dedicated solution.</p>
+                    <a onclick="navigateTo('client-hub')" class="btn-cta">Start Technical Consultation</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= PAGE 3: ON-SITE DEPLOYMENT ================= -->
+    <div id="page-deployment" class="page-view">
+        
+        <!-- SUB-PAGE 1 (BG STYLE 3) -->
+        <section class="sub-page bg-style-3">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-badge">// SERVICE DEPLOYMENT 03 - SUB PAGE 1</span>
+                    <h1 class="page-main-title">On-Site Implementation & Field Setup</h1>
+                    <p class="page-lead">Software is only as good as its physical setup. YHORA provides hands-on, on-site setup directly at your business location to ensure hardware alignment and zero downtime during launch.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 2 (BG STYLE 4) -->
+        <section class="sub-page bg-style-4">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 2: Steps 01 & 02 Of Field Protocol</h2>
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h4>Physical Store Audit & Assessment</h4>
+                            <p>We visit your shop to inspect physical cash counters, barcode scanning angles, receipt printer positioning, and network cables to ensure seamless hardware synergy.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h4>Custom System Configuration & Hardware Pairing</h4>
+                            <p>We install the tailored YHORA software onto your POS devices, calibrate barcode scanners, program receipt templates, and configure cash drawer triggers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 3 (BG STYLE 1) -->
+        <section class="sub-page bg-style-1">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 3: Steps 03 & 04 Of Field Protocol</h2>
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h4>Direct Staff Onboarding & Practical Training</h4>
+                            <p>We train your cashiers, inventory managers, and store supervisors on live transaction handling, return processing, and shift closing reports.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h4>Go-Live Monitoring & Ongoing SLA Support</h4>
+                            <p>Our engineer remains on-site during your initial go-live sales hours to guarantee error-free performance and provide instant support.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 4 (BG STYLE 2) -->
+        <section class="sub-page bg-style-2">
+            <div class="container">
+                <div class="feature-card" style="text-align: center; padding: 4rem 2rem;">
+                    <span class="page-badge">// SUB PAGE 4: BOOKING</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Want an Engineer to Inspect Your Shop Setup?</h2>
+                    <a onclick="navigateTo('client-hub')" class="btn-cta">Schedule On-Site Store Visit</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= PAGE 4: YHORA DNA ================= -->
+    <div id="page-dna" class="page-view">
+        
+        <!-- SUB-PAGE 1 (BG STYLE 4) -->
+        <section class="sub-page bg-style-4">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-badge">// OUR PHILOSOPHY 04 - SUB PAGE 1</span>
+                    <h1 class="page-main-title">YHORA DNA & Engineering Standards</h1>
+                    <p class="page-lead">YHORA was built on a single objective: delivering fast, resilient, and custom software tools that give business owners complete control over their physical and digital commerce.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 2 (BG STYLE 1) -->
+        <section class="sub-page bg-style-1">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 2: Why Businesses Choose YHORA</h2>
+                <div class="grid-2">
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-microchip"></i></div>
+                        <h3 class="card-title">Engineered for Daily Speed</h3>
+                        <p class="card-text">In retail, seconds matter at the cashier desk. YHORA systems prioritize raw speed, ensuring instant barcode responses and zero lag during peak customer rush hours.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="card-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+                        <h3 class="card-title">Hands-On Ownership</h3>
+                        <p class="card-text">We aren't a distant web company. We take responsibility for your hardware setup, staff confidence, and continuous system uptime through personal field visits.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 3 (BG STYLE 2) -->
+        <section class="sub-page bg-style-2">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 3: Frequently Asked Questions Part I</h2>
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fa-solid fa-circle-question"></i> What does "On-Site Deployment" mean?</div>
+                    <div class="faq-answer">It means a YHORA software engineer personally visits your commercial store to set up the software, configure printers and barcode scanners, and train your staff in person.</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 4 (BG STYLE 3) -->
+        <section class="sub-page bg-style-3">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 4: Frequently Asked Questions Part II</h2>
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fa-solid fa-circle-question"></i> Will the POS system work if the internet cuts off?</div>
+                    <div class="faq-answer">Yes! YHORA POS systems operate on an offline-first architecture. Sales, inventory deduction, and receipt printing continue locally with zero disruption.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ================= PAGE 5: START A PROJECT ================= -->
+    <div id="page-client-hub" class="page-view">
+        
+        <!-- SUB-PAGE 1 (BG STYLE 1) -->
+        <section class="sub-page bg-style-1">
+            <div class="container">
+                <div class="page-header">
+                    <span class="page-badge">// INITIATE PROJECT 05 - SUB PAGE 1</span>
+                    <h1 class="page-main-title">Start a Project With YHORA</h1>
+                    <p class="page-lead">Take your store or business operations to the next level with custom software and direct field deployment. Request an on-site visit or technical consultation below.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 2 (BG STYLE 2) -->
+        <section class="sub-page bg-style-2">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 2: Submit Consultation Request</h2>
+                <div class="contact-form">
+                    <form onsubmit="event.preventDefault(); alert('Request received. YHORA team will contact you shortly to schedule your site visit.');">
+                        <div class="form-group">
+                            <label>Full Name / Business Title</label>
+                            <input type="text" class="form-control" placeholder="e.g. Alex Mason (Store Owner)" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Email / Phone Number</label>
+                            <input type="text" class="form-control" placeholder="+123456789 or phone number" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Service Needed</label>
+                            <select class="form-control">
+                                <option>Custom POS & Store Management Software</option>
+                                <option>On-Site Store Evaluation & Hardware Setup</option>
+                                <option>Bespoke Web Platform / Enterprise Software</option>
+                                <option>System Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Business Type & Location Details</label>
+                            <textarea class="form-control" placeholder="Describe your shop type (Supermarket, Clothing, Wholesale...), number of cash desks, or location..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Submit Consultation Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 3 (BG STYLE 3) -->
+        <section class="sub-page bg-style-3">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 3: Direct On-Site Support</h2>
+                <div class="feature-card">
+                    <div class="card-icon"><i class="fa-solid fa-headset"></i></div>
+                    <h3 class="card-title">Direct On-Site Field Service</h3>
+                    <p class="card-text">Our team conducts physical site visits to evaluate cash desk layouts, receipt printer compatibility, and network setup before installing your software.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUB-PAGE 4 (BG STYLE 4) -->
+        <section class="sub-page bg-style-4">
+            <div class="container">
+                <h2 class="section-title">// SUB PAGE 4: Post-Launch SLA Guarantee</h2>
+                <div class="feature-card">
+                    <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3 class="card-title">Post-Launch Support & SLA</h3>
+                    <p class="card-text">Every YHORA deployment includes ongoing operational support, emergency troubleshooting, and system software updates customized to your business expansion.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom Hotline Bar -->
+    <div class="bottom-bar">
+        <div onclick="navigateTo('client-hub')" class="contact-link">
+            <i class="fa-solid fa-envelope"></i> Request System Consultation & On-Site Visit
+        </div>
+        <div>&copy; 2026 YHORA Software Systems. All Rights Reserved.</div>
+    </div>
+
+    <!-- Router & Interaction Engine -->
+    <script>
+        const offcanvasMenu = document.getElementById('offcanvasMenu');
+        const menuBtn = document.getElementById('menuToggle');
+        const menuOverlay = document.getElementById('menuOverlay');
+        const navItems = document.querySelectorAll('.nav-item');
+
+        function toggleMenu() {
+            if (offcanvasMenu.classList.contains('active')) closeMenu();
+            else openMenu();
+        }
+
+        function openMenu() {
+            offcanvasMenu.classList.add('active');
+            menuOverlay.classList.add('active');
+            menuBtn.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMenu() {
+            offcanvasMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            menuBtn.classList.remove('is-active');
+            document.body.style.overflow = '';
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+        menuOverlay.addEventListener('click', closeMenu);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && offcanvasMenu.classList.contains('active')) closeMenu();
+        });
+
+        // SPA Navigation Engine
+        function navigateTo(pageId) {
+            closeMenu();
+
+            navItems.forEach(item => {
+                if (item.getAttribute('data-page') === pageId) item.classList.add('active-link');
+                else item.classList.remove('active-link');
+            });
+
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(page => page.classList.remove('active-page'));
+
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                setTimeout(() => {
+                    targetPage.classList.add('active-page');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 100);
+                window.location.hash = pageId;
+            }
+        }
+
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            navigateTo(hash);
+        });
+
+        // Hero Slider Engine
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+        let autoSlideTimer;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('active');
+                if (dots[i]) dots[i].classList.remove('active');
+            });
+
+            currentSlide = (index + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            if (dots[currentSlide]) dots[currentSlide].classList.add('active');
+        }
+
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+
+        function goToSlide(index) {
+            showSlide(index);
+            resetTimer();
+        }
+
+        function startTimer() { autoSlideTimer = setInterval(nextSlide, 4500); }
+        function resetTimer() { clearInterval(autoSlideTimer); startTimer(); }
+
+        startTimer();
+    </script>
+</body>
+</html>
