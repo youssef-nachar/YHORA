@@ -4881,715 +4881,252 @@
      PROJECT BUILDER
 ========================================================= -->
 
-        <section class="section" id="builder">
+<!-- =========================================================
+     PROJECT BUILDER (MODIFIED TO SHOW TIMELINE INSTEAD OF PRICE)
+========================================================= -->
 
-            <div class="container">
+<section class="section" id="builder">
+    <div class="container">
 
+        <div class="section-header reveal">
+            <div>
+                <div class="kicker">04 / PROJECT BUILDER</div>
+                <h2>
+                    Build your
+                    <span class="gradient">software system.</span>
+                </h2>
+            </div>
+            <p>
+                Configure the type of system, modules, scale and business requirements.
+                YHORA calculates a project timeline estimate instantly.
+            </p>
+        </div>
 
-                <div class="section-header reveal">
+        <div class="builder-wrap">
 
-                    <div>
-
-                        <div class="kicker">
-                            04 / PROJECT BUILDER
-                        </div>
-
-                        <h2>
-
-                            Build your
-
-                            <span class="gradient">
-                                software system.
-                            </span>
-
-                        </h2>
-
+            <div class="builder reveal">
+                <div class="builder-header">
+                    <strong>YHORA Solution Builder</strong>
+                    <div class="step-indicator" id="stepIndicator">
+                        <span class="step-dot active"></span>
+                        <span class="step-dot"></span>
+                        <span class="step-dot"></span>
+                        <span class="step-dot"></span>
                     </div>
-
-                    <p>
-
-                        Configure the type of system, modules,
-                        scale and business requirements.
-                        YHORA calculates a project complexity
-                        estimate instantly.
-
-                    </p>
-
                 </div>
 
-
-                <div class="builder-wrap">
-
-
-                    <div class="builder reveal">
-
-
-                        <div class="builder-header">
-
-                            <strong>
-                                YHORA Solution Builder
-                            </strong>
-
-                            <div class="step-indicator" id="stepIndicator">
-
-                                <span class="step-dot active"></span>
-                                <span class="step-dot"></span>
-                                <span class="step-dot"></span>
-                                <span class="step-dot"></span>
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="builder-body">
-
-
-                            <!-- STEP 1 -->
-
-                            <div class="builder-step active" data-step="1">
-
-                                <h3>
-                                    What are we building?
-                                </h3>
-
-                                <p>
-                                    Choose the primary system.
-                                </p>
-
-
-                                <div class="option-grid">
-
-
-                                    <button class="option" data-group="type" data-value="POS" data-score="15">
-
-                                        <span class="option-icon">
-                                            🧾
-                                        </span>
-
-                                        <strong>
-                                            POS System
-                                        </strong>
-
-                                        <small>
-                                            Sales, inventory,
-                                            invoices and customers.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="type" data-value="Clinic" data-score="18">
-
-                                        <span class="option-icon">
-                                            🦷
-                                        </span>
-
-                                        <strong>
-                                            Clinic System
-                                        </strong>
-
-                                        <small>
-                                            Patients, appointments,
-                                            treatments and billing.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="type" data-value="Warehouse" data-score="22">
-
-                                        <span class="option-icon">
-                                            📦
-                                        </span>
-
-                                        <strong>
-                                            Warehouse
-                                        </strong>
-
-                                        <small>
-                                            Orders, operations,
-                                            distribution and returns.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="type" data-value="Dashboard" data-score="14">
-
-                                        <span class="option-icon">
-                                            📊
-                                        </span>
-
-                                        <strong>
-                                            Business Dashboard
-                                        </strong>
-
-                                        <small>
-                                            KPIs, analytics,
-                                            reporting and management.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="type" data-value="Portfolio" data-score="8">
-
-                                        <span class="option-icon">
-                                            ✦
-                                        </span>
-
-                                        <strong>
-                                            Portfolio / CV
-                                        </strong>
-
-                                        <small>
-                                            Professional digital identity.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="type" data-value="Custom" data-score="28">
-
-                                        <span class="option-icon">
-                                            ∞
-                                        </span>
-
-                                        <strong>
-                                            Custom Platform
-                                        </strong>
-
-                                        <small>
-                                            Completely custom business workflow.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- STEP 2 -->
-
-                            <div class="builder-step" data-step="2">
-
-                                <h3>
-                                    Which modules?
-                                </h3>
-
-                                <p>
-                                    Select everything the system should include.
-                                </p>
-
-
-                                <div class="option-grid">
-
-
-                                    <button class="option multi" data-group="module" data-value="Authentication"
-                                        data-score="7">
-
-                                        <span class="option-icon">
-                                            🔐
-                                        </span>
-
-                                        <strong>
-                                            Authentication
-                                        </strong>
-
-                                        <small>
-                                            Login, roles and permissions.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="Dashboard"
-                                        data-score="7">
-
-                                        <span class="option-icon">
-                                            📊
-                                        </span>
-
-                                        <strong>
-                                            Dashboard
-                                        </strong>
-
-                                        <small>
-                                            KPIs, analytics and charts.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="Reports"
-                                        data-score="6">
-
-                                        <span class="option-icon">
-                                            📑
-                                        </span>
-
-                                        <strong>
-                                            Reports
-                                        </strong>
-
-                                        <small>
-                                            Advanced reporting and export.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="Inventory"
-                                        data-score="9">
-
-                                        <span class="option-icon">
-                                            📦
-                                        </span>
-
-                                        <strong>
-                                            Inventory
-                                        </strong>
-
-                                        <small>
-                                            Stock, items and movement.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="CRM" data-score="8">
-
-                                        <span class="option-icon">
-                                            👥
-                                        </span>
-
-                                        <strong>
-                                            CRM
-                                        </strong>
-
-                                        <small>
-                                            Customers, clients and communication.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="Notifications"
-                                        data-score="5">
-
-                                        <span class="option-icon">
-                                            🔔
-                                        </span>
-
-                                        <strong>
-                                            Notifications
-                                        </strong>
-
-                                        <small>
-                                            Alerts and activity updates.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="Cloud Database"
-                                        data-score="12">
-
-                                        <span class="option-icon">
-                                            ☁
-                                        </span>
-
-                                        <strong>
-                                            Cloud Database
-                                        </strong>
-
-                                        <small>
-                                            Firebase / cloud-backed data.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option multi" data-group="module" data-value="API Integration"
-                                        data-score="10">
-
-                                        <span class="option-icon">
-                                            ⛓
-                                        </span>
-
-                                        <strong>
-                                            API Integration
-                                        </strong>
-
-                                        <small>
-                                            External services and integrations.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- STEP 3 -->
-
-                            <div class="builder-step" data-step="3">
-
-                                <h3>
-                                    How large is the operation?
-                                </h3>
-
-                                <p>
-                                    Select the expected scale.
-                                </p>
-
-
-                                <div class="option-grid">
-
-
-                                    <button class="option" data-group="scale" data-value="Small Team" data-score="5">
-
-                                        <span class="option-icon">
-                                            👤
-                                        </span>
-
-                                        <strong>
-                                            Small Team
-                                        </strong>
-
-                                        <small>
-                                            1–5 users.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="scale" data-value="Growing Team" data-score="10">
-
-                                        <span class="option-icon">
-                                            👥
-                                        </span>
-
-                                        <strong>
-                                            Growing Team
-                                        </strong>
-
-                                        <small>
-                                            6–25 users.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="scale" data-value="Enterprise" data-score="18">
-
-                                        <span class="option-icon">
-                                            🏢
-                                        </span>
-
-                                        <strong>
-                                            Enterprise
-                                        </strong>
-
-                                        <small>
-                                            25+ users / multiple teams.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="scale" data-value="Multi Branch" data-score="25">
-
-                                        <span class="option-icon">
-                                            🌐
-                                        </span>
-
-                                        <strong>
-                                            Multi-Branch
-                                        </strong>
-
-                                        <small>
-                                            Multiple locations and operations.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- STEP 4 -->
-
-                            <div class="builder-step" data-step="4">
-
-                                <h3>
-                                    What matters most?
-                                </h3>
-
-                                <p>
-                                    Choose the business priority.
-                                </p>
-
-
-                                <div class="option-grid">
-
-
-                                    <button class="option" data-group="priority" data-value="Speed" data-score="4">
-
-                                        <span class="option-icon">
-                                            ⚡
-                                        </span>
-
-                                        <strong>
-                                            Speed
-                                        </strong>
-
-                                        <small>
-                                            Fast launch and simple workflows.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="priority" data-value="Automation" data-score="9">
-
-                                        <span class="option-icon">
-                                            ⚙
-                                        </span>
-
-                                        <strong>
-                                            Automation
-                                        </strong>
-
-                                        <small>
-                                            Reduce repetitive work.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="priority" data-value="Analytics" data-score="8">
-
-                                        <span class="option-icon">
-                                            📈
-                                        </span>
-
-                                        <strong>
-                                            Analytics
-                                        </strong>
-
-                                        <small>
-                                            Data-driven management.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                    <button class="option" data-group="priority" data-value="Scalability"
-                                        data-score="12">
-
-                                        <span class="option-icon">
-                                            🚀
-                                        </span>
-
-                                        <strong>
-                                            Scalability
-                                        </strong>
-
-                                        <small>
-                                            Designed for future expansion.
-                                        </small>
-
-                                        <span class="option-check">
-                                            ✓
-                                        </span>
-
-                                    </button>
-
-
-                                </div>
-
-                            </div>
-
-
-                        </div>
-
-
-                        <div class="builder-footer">
-
-                            <button class="btn" id="builderBack">
-                                ← Back
+                <div class="builder-body">
+                    <!-- STEP 1 -->
+                    <div class="builder-step active" data-step="1">
+                        <h3>What are we building?</h3>
+                        <p>Choose the primary system.</p>
+                        <div class="option-grid">
+                            <button class="option" data-group="type" data-value="POS" data-score="15">
+                                <span class="option-icon">🧾</span>
+                                <strong>POS System</strong>
+                                <small>Sales, inventory, invoices and customers.</small>
+                                <span class="option-check">✓</span>
                             </button>
-
-                            <button class="btn btn-primary" id="builderNext">
-                                Continue →
+                            <button class="option" data-group="type" data-value="Clinic" data-score="18">
+                                <span class="option-icon">🦷</span>
+                                <strong>Clinic System</strong>
+                                <small>Patients, appointments, treatments and billing.</small>
+                                <span class="option-check">✓</span>
                             </button>
-
+                            <button class="option" data-group="type" data-value="Warehouse" data-score="22">
+                                <span class="option-icon">📦</span>
+                                <strong>Warehouse</strong>
+                                <small>Orders, operations, distribution and returns.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="type" data-value="Dashboard" data-score="14">
+                                <span class="option-icon">📊</span>
+                                <strong>Business Dashboard</strong>
+                                <small>KPIs, analytics, reporting and management.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="type" data-value="Portfolio" data-score="8">
+                                <span class="option-icon">✦</span>
+                                <strong>Portfolio / CV</strong>
+                                <small>Professional digital identity.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="type" data-value="Custom" data-score="28">
+                                <span class="option-icon">∞</span>
+                                <strong>Custom Platform</strong>
+                                <small>Completely custom business workflow.</small>
+                                <span class="option-check">✓</span>
+                            </button>
                         </div>
-
                     </div>
 
-
-                    <!-- SUMMARY -->
-
-                    <aside class="builder-summary reveal">
-
-                        <span class="summary-badge">
-                            LIVE ESTIMATE
-                        </span>
-
-                        <div class="summary-title" id="summaryType">
-                            Custom Solution
+                    <!-- STEP 2 -->
+                    <div class="builder-step" data-step="2">
+                        <h3>Which modules?</h3>
+                        <p>Select everything the system should include.</p>
+                        <div class="option-grid">
+                            <button class="option multi" data-group="module" data-value="Authentication" data-score="7">
+                                <span class="option-icon">🔐</span>
+                                <strong>Authentication</strong>
+                                <small>Login, roles and permissions.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="Dashboard" data-score="7">
+                                <span class="option-icon">📊</span>
+                                <strong>Dashboard</strong>
+                                <small>KPIs, analytics and charts.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="Reports" data-score="6">
+                                <span class="option-icon">📑</span>
+                                <strong>Reports</strong>
+                                <small>Advanced reporting and export.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="Inventory" data-score="9">
+                                <span class="option-icon">📦</span>
+                                <strong>Inventory</strong>
+                                <small>Stock, items and movement.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="CRM" data-score="8">
+                                <span class="option-icon">👥</span>
+                                <strong>CRM</strong>
+                                <small>Customers, clients and communication.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="Notifications" data-score="5">
+                                <span class="option-icon">🔔</span>
+                                <strong>Notifications</strong>
+                                <small>Alerts and activity updates.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="Cloud Database" data-score="12">
+                                <span class="option-icon">☁</span>
+                                <strong>Cloud Database</strong>
+                                <small>Firebase / cloud-backed data.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option multi" data-group="module" data-value="API Integration" data-score="10">
+                                <span class="option-icon">⛓</span>
+                                <strong>API Integration</strong>
+                                <small>External services and integrations.</small>
+                                <span class="option-check">✓</span>
+                            </button>
                         </div>
+                    </div>
 
-                        <p class="summary-sub" id="summaryDescription">
-
-                            Configure your project and the
-                            estimate will update automatically.
-
-                        </p>
-
-
-                        <div class="summary-price" id="summaryPrice">
-
-                            $1,500+
-
-                            <span>
-                                ESTIMATED PROJECT RANGE
-                            </span>
-
+                    <!-- STEP 3 -->
+                    <div class="builder-step" data-step="3">
+                        <h3>How large is the operation?</h3>
+                        <p>Select the expected scale.</p>
+                        <div class="option-grid">
+                            <button class="option" data-group="scale" data-value="Small Team" data-score="5">
+                                <span class="option-icon">👤</span>
+                                <strong>Small Team</strong>
+                                <small>1–5 users.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="scale" data-value="Growing Team" data-score="10">
+                                <span class="option-icon">👥</span>
+                                <strong>Growing Team</strong>
+                                <small>6–25 users.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="scale" data-value="Enterprise" data-score="18">
+                                <span class="option-icon">🏢</span>
+                                <strong>Enterprise</strong>
+                                <small>25+ users / multiple teams.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="scale" data-value="Multi Branch" data-score="25">
+                                <span class="option-icon">🌐</span>
+                                <strong>Multi-Branch</strong>
+                                <small>Multiple locations and operations.</small>
+                                <span class="option-check">✓</span>
+                            </button>
                         </div>
+                    </div>
 
-
-                        <ul class="summary-list" id="summaryList">
-
-                            <li>
-                                <span>System</span>
-                                <b>Not selected</b>
-                            </li>
-
-                            <li>
-                                <span>Modules</span>
-                                <b>0</b>
-                            </li>
-
-                            <li>
-                                <span>Scale</span>
-                                <b>Not selected</b>
-                            </li>
-
-                            <li>
-                                <span>Complexity</span>
-                                <b>Starter</b>
-                            </li>
-
-                        </ul>
-
-
-                        <button class="btn btn-primary" style="width:100%;margin-top:20px" id="sendBuilder">
-                            Send This Project →
-                        </button>
-
-                    </aside>
-
-
+                    <!-- STEP 4 -->
+                    <div class="builder-step" data-step="4">
+                        <h3>What matters most?</h3>
+                        <p>Choose the business priority.</p>
+                        <div class="option-grid">
+                            <button class="option" data-group="priority" data-value="Speed" data-score="4">
+                                <span class="option-icon">⚡</span>
+                                <strong>Speed</strong>
+                                <small>Fast launch and simple workflows.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="priority" data-value="Automation" data-score="9">
+                                <span class="option-icon">⚙</span>
+                                <strong>Automation</strong>
+                                <small>Reduce repetitive work.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="priority" data-value="Analytics" data-score="8">
+                                <span class="option-icon">📈</span>
+                                <strong>Analytics</strong>
+                                <small>Data-driven management.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                            <button class="option" data-group="priority" data-value="Scalability" data-score="12">
+                                <span class="option-icon">🚀</span>
+                                <strong>Scalability</strong>
+                                <small>Designed for future expansion.</small>
+                                <span class="option-check">✓</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
 
+                <div class="builder-footer">
+                    <button class="btn" id="builderBack">← Back</button>
+                    <button class="btn btn-primary" id="builderNext">Continue →</button>
+                </div>
             </div>
 
-        </section>
+            <!-- SUMMARY (MODIFIED) -->
+            <aside class="builder-summary reveal">
+                <span class="summary-badge">LIVE ESTIMATE</span>
+                <div class="summary-title" id="summaryType">Custom Solution</div>
+                <p class="summary-sub" id="summaryDescription">
+                    Configure your project and the estimate will update automatically.
+                </p>
 
+                <div class="summary-price" id="summaryPrice">
+                    2 - 3 Weeks
+                    <span>ESTIMATED TIMELINE RANGE</span>
+                </div>
+
+                <ul class="summary-list" id="summaryList">
+                    <li>
+                        <span>System</span>
+                        <b>Not selected</b>
+                    </li>
+                    <li>
+                        <span>Modules</span>
+                        <b>0</b>
+                    </li>
+                    <li>
+                        <span>Scale</span>
+                        <b>Not selected</b>
+                    </li>
+                    <li>
+                        <span>Complexity</span>
+                        <b>Starter</b>
+                    </li>
+                </ul>
+
+                <button class="btn btn-primary" style="width:100%;margin-top:20px" id="sendBuilder">
+                    Send This Project →
+                </button>
+            </aside>
+
+        </div>
+    </div>
+</section>
 
         <!-- =========================================================
      EXPERIENCE
@@ -8261,148 +7798,95 @@
            BUILDER SUMMARY
         ========================================================= */
 
-        function getBuilderScore() {
+/* =========================================================
+    BUILDER SUMMARY (TIMELINE BASED)
+========================================================= */
 
-            return (
-                state.builder.typeScore +
-                state.builder.moduleScore +
-                state.builder.scaleScore +
-                state.builder.priorityScore
-            );
+function getBuilderScore() {
+    return (
+        state.builder.typeScore +
+        state.builder.moduleScore +
+        state.builder.scaleScore +
+        state.builder.priorityScore
+    );
+}
 
-        }
+function getComplexity(score) {
+    if (score < 20) {
+        return {
+            name: "Starter",
+            min: "1 - 2",
+            max: "3 Weeks",
+            timeText: "1 - 3 Weeks"
+        };
+    }
+    if (score < 40) {
+        return {
+            name: "Business",
+            min: "3 - 5",
+            max: "6 Weeks",
+            timeText: "3 - 6 Weeks"
+        };
+    }
+    if (score < 65) {
+        return {
+            name: "Advanced",
+            min: "2 - 3",
+            max: "4 Months",
+            timeText: "2 - 4 Months"
+        };
+    }
+    return {
+        name: "Enterprise",
+        min: "4 - 6",
+        max: "8 Months",
+        timeText: "4 - 8 Months"
+    };
+}
 
+function updateSummary() {
+    const score = getBuilderScore();
+    const complexity = getComplexity(score);
+    const type = state.builder.type || "Custom Solution";
 
-        function getComplexity(score) {
+    $("#summaryType").textContent = type;
 
-            if (score < 20) {
+    $("#summaryDescription").textContent = state.builder.type
+        ? `${state.builder.modules.length} modules selected • ${state.builder.scale || "Scale not selected"} • ${state.builder.priority || "Priority not selected"}`
+        : "Configure your project and the timeline estimate will update automatically.";
 
-                return {
-                    name: "Starter",
-                    min: 900,
-                    max: 1800
-                };
+    // عرض المدة الزمنية بدلاً من السعر
+    $("#summaryPrice").innerHTML = `
+        ${complexity.timeText}
+        <span>
+            ESTIMATED TIMELINE RANGE
+            • UP TO ${complexity.max}
+        </span>
+    `;
 
-            }
-
-            if (score < 40) {
-
-                return {
-                    name: "Business",
-                    min: 1800,
-                    max: 4500
-                };
-
-            }
-
-            if (score < 65) {
-
-                return {
-                    name: "Advanced",
-                    min: 4500,
-                    max: 9000
-                };
-
-            }
-
-            return {
-                name: "Enterprise",
-                min: 9000,
-                max: 18000
-            };
-
-        }
-
-
-        function updateSummary() {
-
-            const score =
-                getBuilderScore();
-
-            const complexity =
-                getComplexity(score);
-
-
-            const type =
-                state.builder.type ||
-                "Custom Solution";
-
-
-            $("#summaryType")
-                .textContent =
-                type;
-
-
-            $("#summaryDescription")
-                .textContent =
-                state.builder.type
-                    ? `${state.builder.modules.length} modules selected • ${state.builder.scale || "Scale not selected"} • ${state.builder.priority || "Priority not selected"}`
-                    : "Configure your project and the estimate will update automatically.";
-
-
-            $("#summaryPrice")
-                .innerHTML = `
-
-            $${complexity.min.toLocaleString()}+
-            <span>
-                ESTIMATED PROJECT RANGE
-                • UP TO $${complexity.max.toLocaleString()}
-            </span>
-
-        `;
-
-
-            $("#summaryList")
-                .innerHTML = `
-
-            <li>
-                <span>System</span>
-                <b>
-                    ${escapeHTML(
-                    state.builder.type ||
-                    "Not selected"
-                )}
-                </b>
-            </li>
-
-            <li>
-                <span>Modules</span>
-                <b>
-                    ${state.builder.modules.length}
-                </b>
-            </li>
-
-            <li>
-                <span>Scale</span>
-                <b>
-                    ${escapeHTML(
-                    state.builder.scale ||
-                    "Not selected"
-                )}
-                </b>
-            </li>
-
-            <li>
-                <span>Priority</span>
-                <b>
-                    ${escapeHTML(
-                    state.builder.priority ||
-                    "Not selected"
-                )}
-                </b>
-            </li>
-
-            <li>
-                <span>Complexity</span>
-                <b>
-                    ${complexity.name}
-                </b>
-            </li>
-
-        `;
-
-        }
-
+    $("#summaryList").innerHTML = `
+        <li>
+            <span>System</span>
+            <b>${escapeHTML(state.builder.type || "Not selected")}</b>
+        </li>
+        <li>
+            <span>Modules</span>
+            <b>${state.builder.modules.length}</b>
+        </li>
+        <li>
+            <span>Scale</span>
+            <b>${escapeHTML(state.builder.scale || "Not selected")}</b>
+        </li>
+        <li>
+            <span>Priority</span>
+            <b>${escapeHTML(state.builder.priority || "Not selected")}</b>
+        </li>
+        <li>
+            <span>Complexity</span>
+            <b>${complexity.name}</b>
+        </li>
+    `;
+}
 
         /* =========================================================
            BUILDER REQUEST
